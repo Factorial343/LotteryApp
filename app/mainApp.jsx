@@ -1,62 +1,47 @@
 import React, { useState } from 'react';
-import { StyleSheet, View, SafeAreaView } from 'react-native';
-import { Provider as PaperProvider, Appbar } from 'react-native-paper';
-import LotteryDisplay from '../components/LotteryDisplay.jsx';
-import NumberInput from '../components/NumberInput.jsx';
-import * as FileSystem from 'expo-file-system';
-import { readString } from 'react-native-csv';
+import { Link } from 'expo-router';
+import { StyleSheet, View, ScrollView, Text } from 'react-native';
+import { Provider as PaperProvider } from 'react-native-paper';
+import LotteryDisplay from '../components/LotteryDisplay';
+import NumberInput from '../components/NumberInput';
+import RecentSearches from '../components/RecentSearches';
+import HowItWorks from '../components/HowItWorks';
 import numbers from '../assets/numbers.json';
+import { useSearchHistory, SearchHistoryProvider } from '../context/SearchHistoryContext';
 
-
-export default function App() {
+export default function MainApp() {
   const [result, setResult] = useState(null);
   const [loading, setLoading] = useState(false);
 
-const fetchNumber = async (word) => {
-  try {
+  const fetchNumber = async (word) => {
     setLoading(true);
-
-    // Since numbers is a JSON array, no need to read or parse files
-    const entry = numbers.find(
-      item => item.word.toLowerCase() === word.toLowerCase()
-    );
-
-    setResult(entry ? entry.number : 'Not found');
-  } catch (error) {
-    console.error('Error:', error);
-    setResult('Error loading data');
-  } finally {
+    const entry = numbers.find(item => item.word.toLowerCase() === word.toLowerCase());
+    setResult(entry ? entry : null);
     setLoading(false);
-  }
-};
-
+  };
 
   return (
     <PaperProvider>
-      <SafeAreaView style={styles.container}>
-        <Appbar.Header style={styles.header}>
-          <Appbar.Content title="Lucky Numbers Book" />
-        </Appbar.Header>
-        <View style={styles.content}>
+      <SearchHistoryProvider>
+        <ScrollView contentContainerStyle={styles.content}>
           <NumberInput onSubmit={fetchNumber} loading={loading} />
           <LotteryDisplay result={result} />
-        </View>
-      </SafeAreaView>
+          
+          <HowItWorks />
+        </ScrollView>
+      </SearchHistoryProvider>
     </PaperProvider>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#f5f5f5',
-  },
-  header: {
-    backgroundColor: '#3f51b5',
-  },
-  content: {
-    flex: 1,
-    padding: 20,
-    justifyContent: 'center',
-  },
+  content: { padding: 20, alignItems: 'center' },
+  historyLink: {
+    color: '#FFA500',
+    fontWeight: 'bold',
+    marginVertical: 12,
+    fontSize: 16,
+    fontFamily: 'Inter',
+    textDecorationLine: 'underline'
+  }
 });
