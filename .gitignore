@@ -10,7 +10,7 @@ web-build/
 expo-env.d.ts
 
 #assets
-assets/
+assets/numbers.json
 
 # Native
 .kotlin/
