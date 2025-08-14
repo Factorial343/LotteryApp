@@ -13,7 +13,7 @@ export default function HomeScreen() {
           <Card.Content style={styles.content}>
             <Icon name="ticket-confirmation" size={64} color="#FFD700" style={styles.icon} />
             <Text variant="headlineLarge" style={styles.title}>
-              Lucky Numbers Book
+              Mr. Know It All's{'\n'}Lottery Dream Book
             </Text>
             <Text variant="bodyMedium" style={styles.paragraph}>
               Enter a word and discover its secret lottery number! Our classic lottery book brings tradition to your fingertips.
@@ -32,7 +32,7 @@ export default function HomeScreen() {
         </Card>
       </LinearGradient>
       <Text variant="bodySmall" style={styles.footer}>
-        Good luck and play responsibly!
+        "The most comprehensive lottery dream book in the world"
       </Text>
     </View>
   );
@@ -41,10 +41,10 @@ export default function HomeScreen() {
 const styles = StyleSheet.create({
   container: { flex: 1, justifyContent: 'center', alignItems: 'center', padding: 16 },
   cardGradient: { borderRadius: 20, width: '100%', maxWidth: 380 },
-  card: { borderRadius: 20, backgroundColor: 'transparent' },
+  card: { borderRadius: 20, backgroundColor: '#fffdf5' },
   content: { alignItems: 'center' },
   icon: { marginBottom: 16 },
-  title: { fontFamily: 'PlayfairDisplay', color: '#FFA500', marginBottom: 12, fontWeight: 'bold' },
+  title: { fontFamily: 'PlayfairDisplay', textAlign: 'center', color: '#FFA500', marginBottom: 12, fontWeight: 'bold' },
   paragraph: { fontFamily: 'Inter', color: '#FFA500', textAlign: 'center', marginBottom: 24 },
   button: { backgroundColor: '#FFD700', borderRadius: 8, paddingVertical: 6, paddingHorizontal: 20 },
   buttonLabel: { color: '#FFA500', fontWeight: 'bold', fontSize: 18 },
