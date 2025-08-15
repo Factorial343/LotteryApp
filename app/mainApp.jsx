@@ -48,7 +48,19 @@ export default function MainApp() {
       setResult(transformedEntry);
       addToHistory(transformedEntry);
     } else {
-      setResult(null);
+       const min = Math.pow(10, digitLimit - 1);
+      const max = Math.pow(10, digitLimit) - 1;
+      const randomNumber = Math.floor(
+        Math.random() * (max - min + 1) + min
+      ).toString();
+      const transformedEntry = {
+        word,
+        number: randomNumber,
+        displayNumber: randomNumber,
+        category: 'random'
+  };
+  setResult(transformedEntry);
+      addToHistory(transformedEntry);
     }
   } catch (error) {
     console.error('Error in fetchNumber:', error);
